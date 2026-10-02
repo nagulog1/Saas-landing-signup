@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard · Meshwatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="min-h-screen bg-field font-sans text-ink antialiased">
+  <header class="bg-petrol text-white">
+    <div class="mx-auto max-w-page px-5 h-16 flex items-center gap-4">
+      <a href="/" class="flex items-center gap-2 text-xl font-extrabold wide"><span class="h-2.5 w-2.5 rounded-full bg-live"></span>meshwatch</a>
+      <span id="who" class="ml-auto hidden sm:block text-sm text-white/70 truncate"></span>
+      <button id="logoutBtn" class="ml-auto sm:ml-0 rounded-lg px-3 py-1.5 text-sm text-white/80 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber">Sign out</button>
+    </div>
+  </header>
+
+  <main id="app" class="mx-auto max-w-page px-5 py-10 hidden">
+    <!-- Thank-you banner -->
+    <section class="grid md:grid-cols-[1fr_auto] gap-6 items-end">
+      <div>
+        <p id="welcomeLine" class="text-muted font-medium">Thanks for confirming your email</p>
+        <h1 id="hello" class="mt-1 wide font-extrabold text-4xl sm:text-5xl leading-tight"></h1>
+        <p class="mt-3 text-lg text-muted">Your trial runs until <strong id="trialEnd" class="text-ink"></strong>.</p>
+      </div>
+      <div class="rounded-xl bg-white border border-line px-5 py-4 min-w-[14rem]">
+        <div class="text-sm text-muted">Trial days left</div>
+        <div class="mt-1 flex items-baseline gap-2"><span id="daysLeft" class="wider font-extrabold text-4xl"></span><span class="text-muted">of 14</span></div>
+        <div class="mt-3 h-2 rounded-full bg-field overflow-hidden"><div id="trialBar" class="h-full bg-amber rounded-full"></div></div>
+      </div>
+    </section>
+
+    <div class="mt-10 grid lg:grid-cols-[1.6fr_1fr] gap-6 items-start">
+      <!-- Setup checklist: real order, so numbered -->
+      <section class="rounded-2xl bg-white border border-line p-6 sm:p-8">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 class="text-xl font-bold">Get set up</h2>
+          <span class="text-sm text-muted">1 of 4 done</span>
+        </div>
+        <ol class="mt-6 space-y-6">
+          <li class="flex gap-4">
+            <span class="mt-0.5 h-7 w-7 shrink-0 rounded-full bg-live text-white grid place-items-center" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2.5 7.5l3 3 6-7"/></svg>
+            </span>
+            <div><h3 class="font-semibold text-muted line-through decoration-1">Confirm your email</h3><p class="text-sm text-muted">Done. Alerts can reach <span id="emailOut"></span>.</p></div>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-petrol grid place-items-center font-semibold text-sm">2</span>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-semibold">Connect your first device</h3>
+              <p class="text-sm text-muted">Send this from your device or gateway once a minute. Any HTTP client works.</p>
+              <pre class="mt-3 rounded-lg bg-petrol text-white/90 p-4 text-[13px] leading-relaxed overflow-x-auto font-mono"><code id="snippet"></code></pre>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-line text-muted grid place-items-center font-semibold text-sm">3</span>
+            <div><h3 class="font-semibold">Set an alert rule</h3><p class="text-sm text-muted">Choose how long silence is too long. Available once a device reports in.</p></div>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-line text-muted grid place-items-center font-semibold text-sm">4</span>
+            <div><h3 class="font-semibold">Invite your on-call team</h3><p class="text-sm text-muted">Add the people who should get paged, and their shifts.</p></div>
+          </li>
+        </ol>
+      </section>
+
+      <div class="space-y-6">
+        <!-- API key -->
+        <section class="rounded-2xl bg-white border border-line p-6">
+          <h2 class="text-lg font-bold">Your API key</h2>
+          <p class="mt-1 text-sm text-muted">Keep it secret. Anyone with it can send data to your account.</p>
+          <div class="mt-4 flex gap-2">
+            <code id="apiKey" class="flex-1 min-w-0 truncate rounded-lg bg-field px-3 py-2.5 font-mono text-sm"></code>
+            <button id="revealBtn" class="rounded-lg border border-line px-3 text-sm font-medium hover:border-ink/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber">Show</button>
+            <button id="copyBtn" class="rounded-lg bg-petrol text-white px-3 text-sm font-medium hover:bg-petrol-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber">Copy</button>
+          </div>
+        </section>
+
+        <!-- Account -->
+        <section class="rounded-2xl bg-white border border-line p-6">
+          <h2 class="text-lg font-bold">Account</h2>
+          <dl class="mt-4 grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-[15px]">
+            <dt class="text-muted">Plan</dt><dd id="plan" class="font-medium"></dd>
+            <dt class="text-muted">Fleet size</dt><dd id="fleet" class="font-medium"></dd>
+            <dt class="text-muted">Company</dt><dd id="company" class="font-medium"></dd>
+            <dt class="text-muted">Joined</dt><dd id="joined" class="font-medium"></dd>
+          </dl>
+        </section>
+
+        <!-- Empty fleet state -->
+        <section class="rounded-2xl border-2 border-dashed border-line p-6 text-center">
+          <div class="mx-auto grid grid-cols-6 gap-1 w-28 opacity-40" aria-hidden="true">
+            <span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span>
+            <span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span><span class="aspect-square rounded-[2px] bg-muted/40"></span>
+          </div>
+          <h2 class="mt-4 font-bold">No devices yet</h2>
+          <p class="mt-1 text-sm text-muted">Your first heartbeat will appear here as a green square.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" role="status" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 rounded-lg bg-ink text-white text-sm px-4 py-2.5 shadow-lg"></div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

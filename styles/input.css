@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Archivo has a width axis: headlines use the wide cut, body text the normal one */
+@layer utilities {
+  .wide { font-stretch: 118%; }
+  .wider { font-stretch: 125%; }
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Fleet grid in the hero */
+.cell { transition: background-color .35s ease, box-shadow .35s ease, transform .35s ease; }
+.cell.beat { background-color: #7FE0A8; box-shadow: 0 0 10px 1px rgba(47,191,113,.55); }
+.cell.down { background-color: #E5484D; box-shadow: 0 0 12px 2px rgba(229,72,77,.6); transform: scale(1.15); }
+.log-line { animation: logIn .4s ease both; }
+@keyframes logIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .cell, .log-line { transition: none; animation: none; }
+}
+
+/* FAQ disclosure marker */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(45deg); }
+
+/* Radio "chips" used for fleet size and plan */
+.choice input:checked + span { border-color: #0B3C49; background: #0B3C49; color: #fff; }
+.choice input:focus-visible + span { outline: 2px solid #F5B700; outline-offset: 2px; }
+.plan-choice input:checked + div { border-color: #0B3C49; box-shadow: inset 0 0 0 1px #0B3C49; background: #fff; }
+.plan-choice input:checked + div .plan-dot { background: #0B3C49; box-shadow: inset 0 0 0 3px #fff; }
+.plan-choice input:focus-visible + div { outline: 2px solid #F5B700; outline-offset: 2px; }
+
+/* Invalid fields */
+[aria-invalid="true"] { border-color: #E5484D !important; }

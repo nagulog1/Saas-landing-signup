@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meshwatch: know when a device in the field goes quiet</title>
+  <meta name="description" content="Meshwatch monitors every sensor, gateway and controller you've deployed and alerts the right person within seconds when one goes offline. Free for 14 days." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="bg-field font-sans text-ink antialiased">
+  <a href="#signup" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-amber focus:px-4 focus:py-2 focus:rounded-md">Skip to sign-up</a>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-40 bg-field/90 backdrop-blur border-b border-line/70">
+    <nav class="mx-auto max-w-page px-5 h-16 flex items-center gap-8" aria-label="Main">
+      <a href="/" class="flex items-center gap-2 text-xl font-extrabold wide">
+        <span class="h-2.5 w-2.5 rounded-full bg-live" aria-hidden="true"></span>meshwatch
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-[15px] text-muted">
+        <a href="#features" class="hover:text-ink">Features</a>
+        <a href="#how" class="hover:text-ink">How it works</a>
+        <a href="#pricing" class="hover:text-ink">Pricing</a>
+        <a href="#faq" class="hover:text-ink">FAQ</a>
+      </div>
+      <a href="#signup" class="ml-auto rounded-lg bg-amber px-4 py-2 font-semibold hover:bg-amber-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Start free trial</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="mx-auto max-w-page px-5 pt-14 pb-20 lg:pt-20 grid lg:grid-cols-[1.05fr_1fr] gap-12 items-center">
+      <div>
+        <h1 class="wide font-extrabold text-[2.6rem] leading-[1.02] sm:text-6xl tracking-tight">Know when a device in the field goes quiet.</h1>
+        <p class="mt-6 text-lg text-muted leading-relaxed max-w-[34rem]">Meshwatch watches every sensor, gateway and controller you've deployed. When one stops reporting or drifts out of range, the right person hears about it within seconds.</p>
+
+        <form id="heroForm" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg" novalidate>
+          <label for="heroEmail" class="sr-only">Work email</label>
+          <input id="heroEmail" type="email" autocomplete="email" placeholder="you@company.com"
+            class="flex-1 rounded-lg border border-line bg-white px-4 py-3.5 text-base outline-none focus:border-petrol focus:ring-4 focus:ring-petrol/15" />
+          <button class="rounded-lg bg-amber px-6 py-3.5 font-semibold hover:bg-amber-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Start free trial</button>
+        </form>
+        <p class="mt-3 text-sm text-muted">14 days free on any plan. No card needed.</p>
+      </div>
+
+      <!-- Signature element: a live fleet -->
+      <figure class="rounded-2xl bg-petrol text-white p-5 sm:p-6 shadow-[0_30px_60px_-30px_rgba(11,60,73,.6)]" aria-label="Example: a fleet of 96 devices with live status">
+        <div class="flex items-baseline justify-between gap-4">
+          <div>
+            <div class="font-semibold">Pump station, Ennore</div>
+            <div class="text-sm text-white/60">96 devices</div>
+          </div>
+          <div class="text-right font-mono text-sm"><span id="onlineCount" class="text-live">96</span><span class="text-white/60"> online</span></div>
+        </div>
+        <div id="fleet" class="mt-5 grid grid-cols-12 gap-1.5 sm:gap-2" aria-hidden="true"></div>
+        <ol id="log" class="mt-5 h-[7.5rem] overflow-hidden font-mono text-[12.5px] leading-6 text-white/80 border-t border-white/10 pt-3" aria-hidden="true"></ol>
+      </figure>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="bg-white border-y border-line">
+      <div class="mx-auto max-w-page px-5 py-20">
+        <h2 class="wide font-extrabold text-3xl sm:text-4xl max-w-2xl leading-tight">Built for teams with hardware they can't see.</h2>
+        <p class="mt-4 text-muted text-lg max-w-2xl">Pumps on a rooftop, cold-storage sensors across a state, meters in a basement. If it can send a heartbeat, Meshwatch can watch it.</p>
+
+        <div class="mt-14 grid lg:grid-cols-[1.2fr_1fr] gap-12">
+          <!-- Lead feature with a small timeline -->
+          <div class="rounded-2xl bg-field p-7 sm:p-9">
+            <h3 class="text-2xl font-bold wide">Alerts in seconds, not at the next site visit</h3>
+            <p class="mt-3 text-muted leading-relaxed max-w-md">Each device has an expected heartbeat. Miss it, and Meshwatch checks twice, then pages whoever is on call by SMS, email or Slack.</p>
+            <ol class="mt-8 space-y-0">
+              <li class="relative pl-8 pb-6 border-l-2 border-line ml-1.5">
+                <span class="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-live ring-4 ring-field"></span>
+                <div class="font-mono text-sm text-muted">10:42:05</div>
+                <div class="font-medium">cold-room-12 sends its last reading, 3.1 °C</div>
+              </li>
+              <li class="relative pl-8 pb-6 border-l-2 border-line ml-1.5">
+                <span class="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-alert ring-4 ring-field"></span>
+                <div class="font-mono text-sm text-muted">10:43:05</div>
+                <div class="font-medium">Heartbeat missed twice. Marked offline.</div>
+              </li>
+              <li class="relative pl-8 ml-1.5">
+                <span class="absolute -left-[7px] top-1 h-4 w-4 rounded-full bg-amber ring-4 ring-field"></span>
+                <div class="font-mono text-sm text-muted">10:43:07</div>
+                <div class="font-medium">Divya, on call, gets an SMS and a Slack message.</div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="space-y-10 lg:pt-4">
+            <div>
+              <h3 class="text-xl font-bold">Works with what you've already deployed</h3>
+              <p class="mt-2 text-muted leading-relaxed">Send heartbeats over MQTT or a plain HTTPS request from ESP32, Raspberry Pi, PLC gateways or LoRaWAN network servers. No new hardware.</p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold">Thresholds, not just on and off</h3>
+              <p class="mt-2 text-muted leading-relaxed">Get told when temperature, vibration or battery voltage crosses a line you set, before the device fails.</p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold">On-call that follows the clock</h3>
+              <p class="mt-2 text-muted leading-relaxed">Set weekly rotations so the night-shift engineer gets the 2 a.m. alert and the day team doesn't.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works: a real sequence, so numbered -->
+    <section id="how" class="mx-auto max-w-page px-5 py-20">
+      <h2 class="wide font-extrabold text-3xl sm:text-4xl">Running in about five minutes</h2>
+      <ol class="mt-12 grid md:grid-cols-3 gap-10">
+        <li>
+          <div class="wider font-extrabold text-5xl text-petrol/25">1</div>
+          <h3 class="mt-2 text-xl font-bold">Add a heartbeat</h3>
+          <p class="mt-2 text-muted leading-relaxed">Paste two lines into your firmware or gateway script. They send a small message with your API key every minute.</p>
+        </li>
+        <li>
+          <div class="wider font-extrabold text-5xl text-petrol/25">2</div>
+          <h3 class="mt-2 text-xl font-bold">Set the rules</h3>
+          <p class="mt-2 text-muted leading-relaxed">Choose how long silence is too long, and which readings count as out of range.</p>
+        </li>
+        <li>
+          <div class="wider font-extrabold text-5xl text-petrol/25">3</div>
+          <h3 class="mt-2 text-xl font-bold">Choose who gets woken up</h3>
+          <p class="mt-2 text-muted leading-relaxed">Add your team and their shifts. Meshwatch handles the rest.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="bg-white border-y border-line">
+      <div class="mx-auto max-w-page px-5 py-20">
+        <h2 class="wide font-extrabold text-3xl sm:text-4xl">Pay for the devices you watch</h2>
+        <p class="mt-4 text-muted text-lg">Every plan starts with 14 days free. Prices in Indian rupees, excluding GST.</p>
+
+        <div class="mt-12 grid md:grid-cols-3 gap-6 items-stretch">
+          <article class="rounded-2xl border border-line p-7 flex flex-col">
+            <h3 class="text-lg font-bold">Starter</h3>
+            <p class="mt-1 text-muted">For a pilot or a single site</p>
+            <p class="mt-6"><span class="wide text-4xl font-extrabold">₹0</span><span class="text-muted"> forever</span></p>
+            <ul class="mt-6 space-y-2.5 text-[15px] flex-1">
+              <li>Up to 25 devices</li>
+              <li>Email alerts</li>
+              <li>7 days of history</li>
+            </ul>
+            <button data-plan="starter" class="plan-btn mt-8 rounded-lg border border-ink/20 px-4 py-3 font-semibold hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber">Choose Starter</button>
+          </article>
+
+          <article class="rounded-2xl border-2 border-petrol p-7 flex flex-col relative bg-field/50">
+            <span class="absolute -top-3.5 left-7 rounded-full bg-amber px-3 py-1 text-sm font-semibold">Most teams pick this</span>
+            <h3 class="text-lg font-bold">Team</h3>
+            <p class="mt-1 text-muted">For fleets across several sites</p>
+            <p class="mt-6"><span class="wide text-4xl font-extrabold">₹2,499</span><span class="text-muted"> / month</span></p>
+            <ul class="mt-6 space-y-2.5 text-[15px] flex-1">
+              <li>Up to 500 devices</li>
+              <li>SMS, email and Slack alerts</li>
+              <li>On-call rotations</li>
+              <li>90 days of history and CSV export</li>
+            </ul>
+            <button data-plan="team" class="plan-btn mt-8 rounded-lg bg-petrol text-white px-4 py-3 font-semibold hover:bg-petrol-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber">Choose Team</button>
+          </article>
+
+          <article class="rounded-2xl border border-line p-7 flex flex-col">
+            <h3 class="text-lg font-bold">Enterprise</h3>
+            <p class="mt-1 text-muted">For thousands of devices</p>
+            <p class="mt-6"><span class="wide text-4xl font-extrabold">Custom</span></p>
+            <ul class="mt-6 space-y-2.5 text-[15px] flex-1">
+              <li>Unlimited devices</li>
+              <li>Single sign-on</li>
+              <li>1 year of history</li>
+              <li>99.9% uptime agreement</li>
+            </ul>
+            <button data-plan="enterprise" class="plan-btn mt-8 rounded-lg border border-ink/20 px-4 py-3 font-semibold hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber">Choose Enterprise</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sign-up -->
+    <section id="signup" class="mx-auto max-w-page px-5 py-20 scroll-mt-16">
+      <div class="grid lg:grid-cols-[0.9fr_1.1fr] rounded-3xl overflow-hidden border border-line bg-white">
+        <div class="bg-petrol text-white p-8 sm:p-10">
+          <h2 class="wide font-extrabold text-3xl leading-tight">Start your 14-day trial</h2>
+          <p class="mt-4 text-white/75 leading-relaxed">Fill this in and we'll email you a link. Click it and you're straight into your dashboard.</p>
+          <ul class="mt-8 space-y-4">
+            <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-live"></span><span>Your API key, ready to paste into your device code</span></li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-live"></span><span>Every Team feature for 14 days, whichever plan you pick</span></li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-live"></span><span>No card. When the trial ends you move to Starter unless you upgrade.</span></li>
+          </ul>
+        </div>
+
+        <form id="signupForm" class="p-8 sm:p-10 space-y-6" novalidate>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block font-medium mb-1.5">Full name</label>
+              <input id="name" name="name" autocomplete="name" required maxlength="60" aria-describedby="name-error"
+                class="w-full rounded-lg border border-line px-4 py-3 outline-none focus:border-petrol focus:ring-4 focus:ring-petrol/15" />
+              <p id="name-error" class="field-error hidden mt-1.5 text-sm text-alert"></p>
+            </div>
+            <div>
+              <label for="email" class="block font-medium mb-1.5">Work email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="email-error"
+                class="w-full rounded-lg border border-line px-4 py-3 outline-none focus:border-petrol focus:ring-4 focus:ring-petrol/15" />
+              <p id="email-error" class="field-error hidden mt-1.5 text-sm text-alert"></p>
+            </div>
+          </div>
+
+          <div>
+            <label for="company" class="block font-medium mb-1.5">Company <span class="font-normal text-muted">(optional)</span></label>
+            <input id="company" name="company" autocomplete="organization" maxlength="80" aria-describedby="company-error"
+              class="w-full rounded-lg border border-line px-4 py-3 outline-none focus:border-petrol focus:ring-4 focus:ring-petrol/15" />
+            <p id="company-error" class="field-error hidden mt-1.5 text-sm text-alert"></p>
+          </div>
+
+          <fieldset aria-describedby="fleetSize-error">
+            <legend class="font-medium mb-2">How many devices do you run?</legend>
+            <div class="flex flex-wrap gap-2">
+              <label class="choice cursor-pointer"><input type="radio" name="fleetSize" value="1-25" class="sr-only" /><span class="block rounded-lg border border-line px-4 py-2.5 hover:border-ink/40">1–25</span></label>
+              <label class="choice cursor-pointer"><input type="radio" name="fleetSize" value="26-250" class="sr-only" /><span class="block rounded-lg border border-line px-4 py-2.5 hover:border-ink/40">26–250</span></label>
+              <label class="choice cursor-pointer"><input type="radio" name="fleetSize" value="251-2000" class="sr-only" /><span class="block rounded-lg border border-line px-4 py-2.5 hover:border-ink/40">251–2,000</span></label>
+              <label class="choice cursor-pointer"><input type="radio" name="fleetSize" value="2000+" class="sr-only" /><span class="block rounded-lg border border-line px-4 py-2.5 hover:border-ink/40">More than 2,000</span></label>
+            </div>
+            <p id="fleetSize-error" class="field-error hidden mt-1.5 text-sm text-alert"></p>
+          </fieldset>
+
+          <fieldset>
+            <legend class="font-medium mb-2">Plan</legend>
+            <div class="grid sm:grid-cols-3 gap-2">
+              <label class="plan-choice cursor-pointer"><input type="radio" name="plan" value="starter" class="sr-only" />
+                <div class="h-full rounded-lg border border-line bg-field/60 px-4 py-3 flex gap-3"><span class="plan-dot mt-1 h-4 w-4 shrink-0 rounded-full border-2 border-petrol"></span><span><span class="block font-semibold">Starter</span><span class="text-sm text-muted">Free</span></span></div></label>
+              <label class="plan-choice cursor-pointer"><input type="radio" name="plan" value="team" class="sr-only" checked />
+                <div class="h-full rounded-lg border border-line bg-field/60 px-4 py-3 flex gap-3"><span class="plan-dot mt-1 h-4 w-4 shrink-0 rounded-full border-2 border-petrol"></span><span><span class="block font-semibold">Team</span><span class="text-sm text-muted">₹2,499/mo</span></span></div></label>
+              <label class="plan-choice cursor-pointer"><input type="radio" name="plan" value="enterprise" class="sr-only" />
+                <div class="h-full rounded-lg border border-line bg-field/60 px-4 py-3 flex gap-3"><span class="plan-dot mt-1 h-4 w-4 shrink-0 rounded-full border-2 border-petrol"></span><span><span class="block font-semibold">Enterprise</span><span class="text-sm text-muted">Custom</span></span></div></label>
+            </div>
+          </fieldset>
+
+          <!-- Honeypot: hidden from people, bots fill it in -->
+          <div class="absolute -left-[9999px]" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="source" id="source" />
+
+          <div>
+            <label class="flex gap-3 items-start cursor-pointer">
+              <input id="consent" name="consent" type="checkbox" class="mt-1 h-4 w-4 accent-petrol" aria-describedby="consent-error" />
+              <span class="text-[15px] text-muted">I agree to the <a href="#" class="underline text-ink">terms</a> and to receive emails about my account.</span>
+            </label>
+            <p id="consent-error" class="field-error hidden mt-1.5 text-sm text-alert"></p>
+          </div>
+
+          <p id="formError" role="alert" class="hidden rounded-lg bg-alert/10 text-alert px-4 py-3 text-sm"></p>
+
+          <div>
+            <button id="submitBtn" type="submit"
+              class="w-full rounded-lg bg-amber px-6 py-4 text-lg font-semibold hover:bg-amber-dark disabled:opacity-60 disabled:cursor-wait focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Start free trial</button>
+            <p class="mt-3 text-center text-sm text-muted">We'll send one email to confirm your address.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mx-auto max-w-3xl px-5 pb-24">
+      <h2 class="wide font-extrabold text-3xl sm:text-4xl">Questions</h2>
+      <div class="mt-8 divide-y divide-line border-y border-line">
+        <details class="group py-5">
+          <summary class="flex justify-between gap-6 cursor-pointer font-semibold text-lg">Which devices can I connect?<span class="faq-icon transition-transform text-2xl leading-none text-muted" aria-hidden="true">+</span></summary>
+          <p class="mt-3 text-muted leading-relaxed">Anything that can send a message over MQTT or HTTPS: ESP32 and ESP8266 boards, Raspberry Pi, industrial gateways, and LoRaWAN network servers through a webhook.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex justify-between gap-6 cursor-pointer font-semibold text-lg">Do I need a credit card for the trial?<span class="faq-icon transition-transform text-2xl leading-none text-muted" aria-hidden="true">+</span></summary>
+          <p class="mt-3 text-muted leading-relaxed">No. You only need an email address you can confirm.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex justify-between gap-6 cursor-pointer font-semibold text-lg">What happens when the trial ends?<span class="faq-icon transition-transform text-2xl leading-none text-muted" aria-hidden="true">+</span></summary>
+          <p class="mt-3 text-muted leading-relaxed">Your account moves to the free Starter plan. Your first 25 devices keep being watched and nothing is deleted.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex justify-between gap-6 cursor-pointer font-semibold text-lg">Why do you need to confirm my email?<span class="faq-icon transition-transform text-2xl leading-none text-muted" aria-hidden="true">+</span></summary>
+          <p class="mt-3 text-muted leading-relaxed">Alerts are only useful if they reach you. Confirming makes sure the address works before you rely on it at 2 a.m.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex justify-between gap-6 cursor-pointer font-semibold text-lg">Can I cancel at any time?<span class="faq-icon transition-transform text-2xl leading-none text-muted" aria-hidden="true">+</span></summary>
+          <p class="mt-3 text-muted leading-relaxed">Yes. Paid plans are billed monthly and you can downgrade from your dashboard.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-petrol text-white/70">
+    <div class="mx-auto max-w-page px-5 py-10 flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-sm">
+      <div class="flex items-center gap-2 text-white font-extrabold wide text-lg"><span class="h-2.5 w-2.5 rounded-full bg-live"></span>meshwatch</div>
+      <p>A student project built for the Elevate Labs internship. Meshwatch is a fictional product.</p>
+    </div>
+  </footer>
+
+  <script src="/js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Link expired · Meshwatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="min-h-screen bg-field font-sans text-ink antialiased flex flex-col">
+  <header class="mx-auto w-full max-w-page px-5 h-16 flex items-center">
+    <a href="/" class="flex items-center gap-2 text-xl font-extrabold wide"><span class="h-2.5 w-2.5 rounded-full bg-live"></span>meshwatch</a>
+  </header>
+
+  <main class="flex-1 grid place-items-center px-5 py-10">
+    <div class="w-full max-w-md">
+      <h1 class="wide font-extrabold text-4xl leading-tight">This link has expired</h1>
+      <p class="mt-4 text-lg text-muted leading-relaxed">Links work once and for 24 hours. Enter your email and we'll send you a new one.</p>
+
+      <form id="expiredForm" class="mt-8 space-y-4" novalidate>
+        <div>
+          <label for="email" class="block font-medium mb-1.5">Email</label>
+          <input id="email" type="email" autocomplete="email" required
+            class="w-full rounded-lg border border-line bg-white px-4 py-3 outline-none focus:border-petrol focus:ring-4 focus:ring-petrol/15" />
+        </div>
+        <p id="error" role="alert" class="hidden text-sm text-alert"></p>
+        <button class="w-full rounded-lg bg-amber px-6 py-3.5 font-semibold hover:bg-amber-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Send a new link</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('expiredForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const error = document.getElementById('error');
+      error.classList.add('hidden');
+      if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email)) {
+        error.textContent = 'Enter an email like name@company.com.';
+        return error.classList.remove('hidden');
+      }
+      const res = await fetch('/api/resend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok && res.status !== 429) {
+        error.textContent = body.error || 'Could not send the email. Try again.';
+        return error.classList.remove('hidden');
+      }
+      sessionStorage.setItem('signupEmail', email);
+      if (body.dev) sessionStorage.setItem('signupDev', JSON.stringify(body.dev));
+      else sessionStorage.removeItem('signupDev');
+      location.href = '/check-email.html';
+    });
+  </script>
+</body>
+</html>

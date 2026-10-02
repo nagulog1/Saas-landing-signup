@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Check your inbox · Meshwatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="min-h-screen bg-field font-sans text-ink antialiased flex flex-col">
+  <header class="mx-auto w-full max-w-page px-5 h-16 flex items-center">
+    <a href="/" class="flex items-center gap-2 text-xl font-extrabold wide"><span class="h-2.5 w-2.5 rounded-full bg-live"></span>meshwatch</a>
+  </header>
+
+  <main class="flex-1 grid place-items-center px-5 py-10">
+    <div class="w-full max-w-lg">
+      <!-- Envelope with a status light: the email is on its way -->
+      <svg width="72" height="56" viewBox="0 0 72 56" fill="none" aria-hidden="true">
+        <rect x="1.5" y="9.5" width="61" height="43" rx="6" fill="#fff" stroke="#0B3C49" stroke-width="3"/>
+        <path d="M4 13l28 21 28-21" stroke="#0B3C49" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="62" cy="10" r="9" fill="#F5B700" stroke="#F2F4F3" stroke-width="3"/>
+      </svg>
+
+      <h1 class="mt-6 wide font-extrabold text-4xl leading-tight">Check your inbox</h1>
+      <p class="mt-4 text-lg text-muted leading-relaxed">We sent a link to <strong id="emailOut" class="text-ink break-all">your email</strong>. Click it to confirm your address and open your dashboard.</p>
+
+      <div class="mt-8 rounded-xl border border-line bg-white p-5">
+        <p class="font-semibold">Can't find it?</p>
+        <ul class="mt-2 space-y-1.5 text-muted">
+          <li>It can take a minute to arrive.</li>
+          <li>Look in Spam, Promotions or Updates.</li>
+          <li>The link works for 24 hours.</li>
+        </ul>
+        <div class="mt-5 flex flex-wrap items-center gap-3">
+          <button id="resendBtn" class="rounded-lg bg-petrol text-white px-5 py-2.5 font-semibold hover:bg-petrol-2 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber">Send the email again</button>
+          <a href="/#signup" class="font-medium underline underline-offset-4">Use a different email</a>
+        </div>
+        <p id="resendMsg" role="status" class="mt-3 text-sm text-muted"></p>
+      </div>
+
+      <!-- Only shown in development, when no real email server is set up -->
+      <div id="devBox" class="hidden mt-6 rounded-xl border-2 border-dashed border-amber bg-amber/10 p-5">
+        <p class="font-semibold">Developer preview</p>
+        <p class="mt-1 text-sm text-muted">No email server is set up, so the email wasn't really delivered. Open it here instead. This box never appears in production.</p>
+        <a id="devLink" target="_blank" rel="noopener" class="mt-3 inline-block rounded-lg bg-amber px-4 py-2 font-semibold hover:bg-amber-dark"></a>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/check-email.js"></script>
+</body>
+</html>

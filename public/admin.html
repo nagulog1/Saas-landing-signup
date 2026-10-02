@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Leads · Meshwatch admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="min-h-screen bg-field font-sans text-ink antialiased">
+  <header class="bg-petrol text-white">
+    <div class="mx-auto max-w-page px-5 h-16 flex items-center gap-3">
+      <a href="/" class="flex items-center gap-2 text-xl font-extrabold wide"><span class="h-2.5 w-2.5 rounded-full bg-live"></span>meshwatch</a>
+      <span class="text-white/60">Leads</span>
+    </div>
+  </header>
+
+  <!-- Password gate -->
+  <main id="gate" class="mx-auto max-w-sm px-5 py-20">
+    <h1 class="wide font-extrabold text-3xl">Leads admin</h1>
+    <form id="gateForm" class="mt-6 space-y-4">
+      <div>
+        <label for="pw" class="block font-medium mb-1.5">Admin password</label>
+        <input id="pw" type="password" autocomplete="current-password" required class="w-full rounded-lg border border-line bg-white px-4 py-3 outline-none focus:border-petrol focus:ring-4 focus:ring-petrol/15" />
+      </div>
+      <p id="gateError" role="alert" class="hidden text-sm text-alert"></p>
+      <button class="w-full rounded-lg bg-petrol text-white py-3 font-semibold hover:bg-petrol-2">Open leads</button>
+    </form>
+  </main>
+
+  <main id="panel" class="hidden mx-auto max-w-page px-5 py-10">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h1 class="wide font-extrabold text-3xl">Leads</h1>
+      <div class="flex gap-2">
+        <button id="refreshBtn" class="rounded-lg border border-line bg-white px-4 py-2 font-medium hover:border-ink/40">Refresh</button>
+        <button id="csvBtn" class="rounded-lg bg-amber px-4 py-2 font-semibold hover:bg-amber-dark">Download CSV</button>
+      </div>
+    </div>
+
+    <dl class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="rounded-xl bg-white border border-line p-5"><dt class="text-sm text-muted">Sign-ups</dt><dd id="sTotal" class="mt-1 wide font-extrabold text-3xl"></dd></div>
+      <div class="rounded-xl bg-white border border-line p-5"><dt class="text-sm text-muted">Confirmed email</dt><dd id="sVerified" class="mt-1 wide font-extrabold text-3xl"></dd></div>
+      <div class="rounded-xl bg-white border border-line p-5"><dt class="text-sm text-muted">Confirmation rate</dt><dd id="sRate" class="mt-1 wide font-extrabold text-3xl"></dd></div>
+      <div class="rounded-xl bg-white border border-line p-5"><dt class="text-sm text-muted">Top source</dt><dd id="sSource" class="mt-1 wide font-extrabold text-3xl truncate"></dd></div>
+    </dl>
+
+    <div class="mt-8 rounded-xl bg-white border border-line overflow-x-auto">
+      <table class="w-full text-left text-[15px]">
+        <thead class="text-sm text-muted border-b border-line">
+          <tr><th class="px-4 py-3 font-medium">Name</th><th class="px-4 py-3 font-medium">Email</th><th class="px-4 py-3 font-medium">Company</th><th class="px-4 py-3 font-medium">Devices</th><th class="px-4 py-3 font-medium">Plan</th><th class="px-4 py-3 font-medium">Source</th><th class="px-4 py-3 font-medium">Status</th><th class="px-4 py-3 font-medium">Signed up</th></tr>
+        </thead>
+        <tbody id="rows" class="divide-y divide-line"></tbody>
+      </table>
+      <p id="noLeads" class="hidden px-4 py-10 text-center text-muted">No sign-ups yet. Share the landing page to get your first lead.</p>
+    </div>
+  </main>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
